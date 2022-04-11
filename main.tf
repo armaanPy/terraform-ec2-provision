@@ -10,6 +10,15 @@ resource "aws_instance" "blockchain_host" {
   tags= {
     Name = "blockchain_instance"
   }
+  
+  connection {
+     type        = "ssh"
+     host        = self.public_ip
+     user        = "ec2-user"
+     private_key = file("/home/ec2-user/.ssh/terrakey")
+     timeout     = "4m"
+   }
+
 }
 
 resource "aws_security_group" "main" {
@@ -44,7 +53,7 @@ resource "aws_security_group" "main" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = var.key_name
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsTwpJZjJ2ZQI3/Ac/SKRb96+2xC86VMN8N4ld6duYdIQdUlg3Omp914o7JHPl3PWFS54Tk3KamN6MownXTC2WWiRHvIWLYNXfISGXNGRisK7Ems6INCI8SGsbZLoIC59uRWBgqwmlrFv4+y57kpZIQlpp8m3QnaKDpkcNifhNi30xgCCc2R8xN2Hj/YddYIxIF4oMBYlzNtHBngXVQhzm8c0FJ16gGkbiejt1ejkQZetCATFPRqTkGrlPuHi6ucTwtgN8a0JGYOb0Dbzqq5ot8hIzrI1w5KVtyyRYtXq6qT4FGMiAZYUMp0tXJN7dpExtGuaDKHk99tQW6B1XgE+r ec2-user@ip-172-31-11-149.ap-east-1.compute.internal"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZlbbdfzA7dWnXfgnlX2AvLpFBGGFd+ku9VAi4GNk6sooqzHTn6JwUb5dSNt0Ua7MwdcLUVDZ8SBdcEDEsivNLoka3V/wWaRGy7CfP4E5gSrh5I0j9y1nmGQiermr5X2l/kq6VnyNY23f935NaAEfA/Ticsl8YeUkkikwLhes9dlKqZAO6t5ngxauUM0SMEgcMLf6AzQ2S45SHp2laLAfMhv5IyF/Zwf8AoGKCVALG2Kl1guqhkBQpMjrKZlv8LjXhSm+IWPRXjnPWC0yrSYSDlJmQRPfDS6klKRZW6QyVbCzwVxFwnieIPiXv6tcCqOWh+W63rawLKK7lse11soBT ec2-user@ip-172-31-11-149.ap-east-1.compute.internal"
 }
 
 resource "aws_eip" "elastic_ip" {
