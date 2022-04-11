@@ -10,15 +10,6 @@ resource "aws_instance" "blockchain_host" {
   tags= {
     Name = "blockchain_instance"
   }
-  
-  connection {
-     type        = "ssh"
-     host        = self.public_ip
-     user        = "ec2-user"
-     private_key = file("/home/ec2-user/.ssh/terrakey")
-     timeout     = "4m"
-   }
-
 }
 
 resource "aws_security_group" "main" {
