@@ -1,14 +1,14 @@
 variable "aws_region" {
-  description = "Hong Kong"
+  description = "Hong Kong ap-east-1."
   default     = "ap-east-1"
 }
 
 variable "key_name" {
-  description = " SSH keys to connect to ec2 instance"
-  default     =  "terraformkey"
+  description = "SSH key to connect to EC2 instance."
+  default     =  "crypt0def1"
 }
 
 variable "instance_type" {
-  description = "instance type for ec2"
+  description = "Instance type for EC2."
   default     =  "t3.micro"
 }
